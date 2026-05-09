@@ -221,85 +221,93 @@ export default function App() {
         {screen === "home" && (
           <div className="flex flex-col min-h-screen">
 
-            {/* Hero image — full width, half screen */}
-            <div className="relative w-full" style={{ height: "55vh" }}>
+            {/* Hero image */}
+            <div className="relative w-full" style={{ height: "48vh" }}>
               <img
-                src="https://cdn.poehali.dev/projects/8b2da2a8-66d6-4695-82c1-472f08d1e8fd/files/92cfa493-4579-432e-a0fc-fb14ca3f0bbf.jpg"
-                alt="Стихи"
+                src="https://cdn.poehali.dev/projects/8b2da2a8-66d6-4695-82c1-472f08d1e8fd/files/63ae14f6-f63d-44c3-89fa-e3f237a06f03.jpg"
+                alt="Не забыть"
                 className="w-full h-full object-cover"
               />
-              {/* Gradient overlay bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0f] via-[#0e0e0f]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0f] via-[#0e0e0f]/20 to-[#0e0e0f]/50" />
 
-              {/* Title on image */}
-              <div className="absolute bottom-0 left-0 right-0 px-6 pb-6">
-                <p className="text-[#c9a96e] text-[10px] tracking-[0.4em] uppercase mb-1">Добро пожаловать</p>
-                <h1 className="font-cormorant text-4xl font-light text-[#e8e4dc] leading-tight">
-                  Стихи<br />наизусть
+              {/* App name top-left */}
+              <div className="absolute top-0 left-0 right-0 px-6 pt-10">
+                <p className="text-[#c9a96e] text-[10px] tracking-[0.5em] uppercase mb-1">приложение</p>
+                <h1 className="font-cormorant text-5xl font-light text-[#e8e4dc] leading-none tracking-wide">
+                  не забыть
                 </h1>
               </div>
             </div>
 
-            {/* Content below hero */}
+            {/* Content */}
             <div className="flex-1 px-6 pt-6 pb-4">
 
-              {/* Tagline */}
-              <p className="text-[#555] text-sm leading-relaxed mb-8">
-                Учите стихи построчно, слушайте эталонных чтецов и отслеживайте свой прогресс.
-              </p>
-
-              {/* Quick action cards */}
-              <div className="space-y-3 mb-6">
-                <button
-                  onClick={() => setScreen("catalog")}
-                  className="w-full flex items-center gap-5 p-5 bg-[#141416] border border-[#1e1e22] hover:border-[#c9a96e]/40 hover:bg-[#17150f] transition-all duration-300 group text-left"
-                >
-                  <div className="w-11 h-11 flex items-center justify-center bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex-shrink-0">
-                    <Icon name="BookOpen" size={20} className="text-[#c9a96e]" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[#e8e4dc] font-medium text-base group-hover:text-[#c9a96e] transition-colors">Каталог стихов</p>
-                    <p className="text-[#444] text-xs mt-0.5">{POEMS.length} стихотворения · выбрать и начать учить</p>
-                  </div>
-                  <Icon name="ChevronRight" size={16} className="text-[#333] group-hover:text-[#c9a96e] transition-colors" />
-                </button>
-
-                <button
-                  onClick={() => setScreen("listen")}
-                  className="w-full flex items-center gap-5 p-5 bg-[#141416] border border-[#1e1e22] hover:border-[#c9a96e]/40 hover:bg-[#17150f] transition-all duration-300 group text-left"
-                >
-                  <div className="w-11 h-11 flex items-center justify-center bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex-shrink-0">
-                    <Icon name="Headphones" size={20} className="text-[#c9a96e]" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[#e8e4dc] font-medium text-base group-hover:text-[#c9a96e] transition-colors">Слушать чтецов</p>
-                    <p className="text-[#444] text-xs mt-0.5">Эталонное чтение · интонация и темп</p>
-                  </div>
-                  <Icon name="ChevronRight" size={16} className="text-[#333] group-hover:text-[#c9a96e] transition-colors" />
-                </button>
-
-                <button
-                  onClick={() => setScreen("stats")}
-                  className="w-full flex items-center gap-5 p-5 bg-[#141416] border border-[#1e1e22] hover:border-[#c9a96e]/40 hover:bg-[#17150f] transition-all duration-300 group text-left"
-                >
-                  <div className="w-11 h-11 flex items-center justify-center bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex-shrink-0">
-                    <Icon name="BarChart2" size={20} className="text-[#c9a96e]" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-[#e8e4dc] font-medium text-base group-hover:text-[#c9a96e] transition-colors">Прогресс</p>
-                    <p className="text-[#444] text-xs mt-0.5">История занятий · результаты и баллы</p>
-                  </div>
-                  <Icon name="ChevronRight" size={16} className="text-[#333] group-hover:text-[#c9a96e] transition-colors" />
-                </button>
+              {/* Quick actions — icon grid */}
+              <div className="grid grid-cols-3 gap-3 mb-8">
+                {[
+                  { icon: "BookOpen", label: "Каталог\nстихов", screen: "catalog" as Screen },
+                  { icon: "Headphones", label: "Слушать\nчтецов", screen: "listen" as Screen },
+                  { icon: "BarChart2", label: "Мой\nпрогресс", screen: "stats" as Screen },
+                ].map((item) => (
+                  <button
+                    key={item.screen}
+                    onClick={() => setScreen(item.screen)}
+                    className="flex flex-col items-center gap-3 py-5 bg-[#141416] border border-[#1e1e22] hover:border-[#c9a96e]/40 hover:bg-[#17150f] transition-all duration-200 group"
+                  >
+                    <div className="w-12 h-12 flex items-center justify-center bg-[#c9a96e]/10 border border-[#c9a96e]/20 group-hover:bg-[#c9a96e]/20 transition-all">
+                      <Icon name={item.icon} size={22} className="text-[#c9a96e]" />
+                    </div>
+                    <p className="text-[#888] text-xs text-center leading-4 group-hover:text-[#c9a96e] transition-colors whitespace-pre-line">
+                      {item.label}
+                    </p>
+                  </button>
+                ))}
               </div>
 
-              {/* Daily quote */}
-              <div className="border-t border-[#1e1e22] pt-5">
-                <p className="text-[#333] text-[10px] tracking-[0.3em] uppercase mb-3">Стихотворение дня</p>
-                <p className="font-cormorant text-lg text-[#666] italic leading-7">
-                  «Белеет парус одинокой<br />В тумане моря голубом!..»
+              {/* Personal progress + Learn button */}
+              <div className="bg-[#141416] border border-[#1e1e22] p-5">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <p className="text-[#555] text-[10px] tracking-[0.3em] uppercase mb-1">Мой прогресс</p>
+                    <p className="font-cormorant text-xl text-[#e8e4dc]">{selectedPoem.title}</p>
+                    <p className="text-[#444] text-xs mt-0.5">{selectedPoem.author}</p>
+                  </div>
+                  <span className={`text-2xl font-cormorant font-light ${progressPct === 100 ? "text-[#6b9b76]" : "text-[#c9a96e]"}`}>
+                    {progressPct}%
+                  </span>
+                </div>
+
+                {/* Progress bar */}
+                <div className="h-0.5 bg-[#1e1e22] mb-1">
+                  <div
+                    className="h-full bg-gradient-to-r from-[#c9a96e] to-[#d4b87a] transition-all duration-700"
+                    style={{ width: `${progressPct}%` }}
+                  />
+                </div>
+                <p className="text-[#333] text-[10px] mb-5">
+                  {learnedLines.length} из {totalLines} строк выучено
                 </p>
-                <p className="text-[#333] text-xs mt-2">— М.Ю. Лермонтов</p>
+
+                {/* Mini stats row */}
+                <div className="flex gap-4 mb-5">
+                  {[
+                    { value: "4", label: "стихи" },
+                    { value: "88%", label: "средний балл" },
+                    { value: "11", label: "занятий" },
+                  ].map((s) => (
+                    <div key={s.label} className="flex-1 text-center">
+                      <p className="font-cormorant text-xl text-[#c9a96e] font-light">{s.value}</p>
+                      <p className="text-[#333] text-[10px] tracking-wide">{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => handleStartLearn(selectedPoem)}
+                  className="w-full py-3.5 bg-[#c9a96e] text-[#0e0e0f] text-sm font-medium tracking-[0.15em] uppercase hover:bg-[#d4b87a] transition-all"
+                >
+                  Учить
+                </button>
               </div>
             </div>
           </div>

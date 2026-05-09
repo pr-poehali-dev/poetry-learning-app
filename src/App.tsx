@@ -219,244 +219,88 @@ export default function App() {
 
         {/* ═══════════════════════════════════════ HOME */}
         {screen === "home" && (
-          <div className="px-6 pt-10">
+          <div className="flex flex-col min-h-screen">
 
-            {/* Top bar */}
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <p className="text-[#555] text-[10px] tracking-[0.3em] uppercase mb-0.5">Изучаем</p>
-                <button
-                  onClick={() => setShowCatalogPicker(!showCatalogPicker)}
-                  className="flex items-center gap-2 group"
-                >
-                  <h2 className="font-cormorant text-xl text-[#e8e4dc] group-hover:text-[#c9a96e] transition-colors leading-tight">
-                    {selectedPoem.title}
-                  </h2>
-                  <Icon name="ChevronDown" size={14} className="text-[#555] group-hover:text-[#c9a96e] transition-colors mt-0.5" />
-                </button>
-                <p className="text-[#444] text-xs mt-0.5">{selectedPoem.author}</p>
+            {/* Hero image — full width, half screen */}
+            <div className="relative w-full" style={{ height: "55vh" }}>
+              <img
+                src="https://cdn.poehali.dev/projects/8b2da2a8-66d6-4695-82c1-472f08d1e8fd/files/92cfa493-4579-432e-a0fc-fb14ca3f0bbf.jpg"
+                alt="Стихи"
+                className="w-full h-full object-cover"
+              />
+              {/* Gradient overlay bottom */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0e0e0f] via-[#0e0e0f]/40 to-transparent" />
+
+              {/* Title on image */}
+              <div className="absolute bottom-0 left-0 right-0 px-6 pb-6">
+                <p className="text-[#c9a96e] text-[10px] tracking-[0.4em] uppercase mb-1">Добро пожаловать</p>
+                <h1 className="font-cormorant text-4xl font-light text-[#e8e4dc] leading-tight">
+                  Стихи<br />наизусть
+                </h1>
               </div>
-              <div className="flex items-center gap-2">
+            </div>
+
+            {/* Content below hero */}
+            <div className="flex-1 px-6 pt-6 pb-4">
+
+              {/* Tagline */}
+              <p className="text-[#555] text-sm leading-relaxed mb-8">
+                Учите стихи построчно, слушайте эталонных чтецов и отслеживайте свой прогресс.
+              </p>
+
+              {/* Quick action cards */}
+              <div className="space-y-3 mb-6">
+                <button
+                  onClick={() => setScreen("catalog")}
+                  className="w-full flex items-center gap-5 p-5 bg-[#141416] border border-[#1e1e22] hover:border-[#c9a96e]/40 hover:bg-[#17150f] transition-all duration-300 group text-left"
+                >
+                  <div className="w-11 h-11 flex items-center justify-center bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex-shrink-0">
+                    <Icon name="BookOpen" size={20} className="text-[#c9a96e]" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[#e8e4dc] font-medium text-base group-hover:text-[#c9a96e] transition-colors">Каталог стихов</p>
+                    <p className="text-[#444] text-xs mt-0.5">{POEMS.length} стихотворения · выбрать и начать учить</p>
+                  </div>
+                  <Icon name="ChevronRight" size={16} className="text-[#333] group-hover:text-[#c9a96e] transition-colors" />
+                </button>
+
                 <button
                   onClick={() => setScreen("listen")}
-                  className="w-9 h-9 flex items-center justify-center border border-[#2a2a2e] text-[#555] hover:text-[#c9a96e] hover:border-[#c9a96e]/30 transition-all"
-                  title="Эталонное чтение"
+                  className="w-full flex items-center gap-5 p-5 bg-[#141416] border border-[#1e1e22] hover:border-[#c9a96e]/40 hover:bg-[#17150f] transition-all duration-300 group text-left"
                 >
-                  <Icon name="Headphones" size={16} />
+                  <div className="w-11 h-11 flex items-center justify-center bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex-shrink-0">
+                    <Icon name="Headphones" size={20} className="text-[#c9a96e]" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[#e8e4dc] font-medium text-base group-hover:text-[#c9a96e] transition-colors">Слушать чтецов</p>
+                    <p className="text-[#444] text-xs mt-0.5">Эталонное чтение · интонация и темп</p>
+                  </div>
+                  <Icon name="ChevronRight" size={16} className="text-[#333] group-hover:text-[#c9a96e] transition-colors" />
                 </button>
+
                 <button
-                  onClick={() => setScreen("settings")}
-                  className="w-9 h-9 flex items-center justify-center border border-[#2a2a2e] text-[#555] hover:text-[#c9a96e] hover:border-[#c9a96e]/30 transition-all"
-                  title="Настройки"
+                  onClick={() => setScreen("stats")}
+                  className="w-full flex items-center gap-5 p-5 bg-[#141416] border border-[#1e1e22] hover:border-[#c9a96e]/40 hover:bg-[#17150f] transition-all duration-300 group text-left"
                 >
-                  <Icon name="Settings" size={16} />
+                  <div className="w-11 h-11 flex items-center justify-center bg-[#c9a96e]/10 border border-[#c9a96e]/20 flex-shrink-0">
+                    <Icon name="BarChart2" size={20} className="text-[#c9a96e]" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="text-[#e8e4dc] font-medium text-base group-hover:text-[#c9a96e] transition-colors">Прогресс</p>
+                    <p className="text-[#444] text-xs mt-0.5">История занятий · результаты и баллы</p>
+                  </div>
+                  <Icon name="ChevronRight" size={16} className="text-[#333] group-hover:text-[#c9a96e] transition-colors" />
                 </button>
               </div>
-            </div>
 
-            {/* Poem picker dropdown */}
-            {showCatalogPicker && (
-              <div className="mb-4 border border-[#2a2a2e] bg-[#141416] divide-y divide-[#1e1e22]">
-                {POEMS.map((p) => (
-                  <button
-                    key={p.id}
-                    onClick={() => handleSelectPoem(p)}
-                    className={`w-full text-left px-4 py-3 flex items-center justify-between hover:bg-[#1a1a1e] transition-colors ${
-                      selectedPoem.id === p.id ? "text-[#c9a96e]" : "text-[#e8e4dc]"
-                    }`}
-                  >
-                    <div>
-                      <p className="font-cormorant text-base">{p.title}</p>
-                      <p className="text-[#444] text-xs">{p.author}</p>
-                    </div>
-                    {selectedPoem.id === p.id && <Icon name="Check" size={14} className="text-[#c9a96e]" />}
-                  </button>
-                ))}
+              {/* Daily quote */}
+              <div className="border-t border-[#1e1e22] pt-5">
+                <p className="text-[#333] text-[10px] tracking-[0.3em] uppercase mb-3">Стихотворение дня</p>
+                <p className="font-cormorant text-lg text-[#666] italic leading-7">
+                  «Белеет парус одинокой<br />В тумане моря голубом!..»
+                </p>
+                <p className="text-[#333] text-xs mt-2">— М.Ю. Лермонтов</p>
               </div>
-            )}
-
-            {/* Progress bar */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[#555] text-xs tracking-wider">
-                  Выучено строк: <span className="text-[#e8e4dc]">{learnedLines.length}</span> из {totalLines}
-                </span>
-                <span className={`text-xs font-mono font-medium ${progressPct === 100 ? "text-[#6b9b76]" : "text-[#c9a96e]"}`}>
-                  {progressPct}%
-                </span>
-              </div>
-              <div className="h-1 bg-[#1e1e22] rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-[#c9a96e] to-[#d4b87a] rounded-full transition-all duration-700"
-                  style={{ width: `${progressPct}%` }}
-                />
-              </div>
-            </div>
-
-            {/* Lines list */}
-            <div className="bg-[#141416] border border-[#1e1e22] mb-4 overflow-hidden">
-              {allLines.map((line, i) => {
-                const isLearned = learnedLines.includes(i);
-                const isCurrent = i === currentLine;
-                const isPast = i < currentLine && !isLearned;
-
-                return (
-                  <div
-                    key={i}
-                    className={`flex items-center gap-3 px-5 py-3 transition-all duration-300 ${
-                      isCurrent
-                        ? "bg-[#1a1508] border-l-2 border-[#c9a96e]"
-                        : isLearned
-                        ? "border-l-2 border-[#6b9b76]/60"
-                        : "border-l-2 border-transparent"
-                    } ${i < allLines.length - 1 ? "border-b border-[#1a1a1e]" : ""}`}
-                  >
-                    {/* Line number / status icon */}
-                    <div className="w-5 flex-shrink-0 flex items-center justify-center">
-                      {isLearned ? (
-                        <Icon name="CheckCircle2" size={15} className="text-[#6b9b76]" />
-                      ) : isCurrent ? (
-                        <div className="w-2 h-2 rounded-full bg-[#c9a96e] animate-pulse" />
-                      ) : (
-                        <span className="text-[#333] text-[10px] font-mono">{i + 1}</span>
-                      )}
-                    </div>
-
-                    {/* Line text */}
-                    <p
-                      className={`font-cormorant text-lg leading-7 flex-1 transition-all duration-300 ${
-                        isCurrent
-                          ? "text-[#f0c070]"
-                          : isLearned
-                          ? "text-[#6b9b76]/80"
-                          : i < currentLine
-                          ? "text-[#333]"
-                          : "text-[#2a2a2e]"
-                      }`}
-                    >
-                      {/* Show errors highlighted in red for current line after voice check */}
-                      {isCurrent && lineResult && lineResult.lineIndex === i
-                        ? (() => {
-                            const words = line.split(" ");
-                            return words.map((word, wi) => (
-                              <span
-                                key={wi}
-                                className={lineResult.errors.includes(wi) ? "text-[#c97070] underline decoration-[#c97070]/60" : ""}
-                              >
-                                {word}{wi < words.length - 1 ? " " : ""}
-                              </span>
-                            ));
-                          })()
-                        : line}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Voice section */}
-            <div className="bg-[#141416] border border-[#1e1e22] p-5 mb-4">
-              {homeVoiceState === "idle" && (
-                <div className="space-y-3">
-                  <p className="text-[#555] text-xs tracking-wider uppercase mb-1">Текущая строка</p>
-                  <p className="font-cormorant text-xl text-[#f0c070] mb-3">
-                    {currentLine < totalLines ? allLines[currentLine] : "Все строки выучены!"}
-                  </p>
-                  {currentLine < totalLines && (
-                    <button
-                      onClick={handleHomeVoiceCheck}
-                      className="w-full flex items-center justify-center gap-3 py-3 bg-[#c9a96e]/10 hover:bg-[#c9a96e]/20 border border-[#c9a96e]/30 text-[#c9a96e] transition-all text-sm tracking-wider"
-                    >
-                      <Icon name="Mic" size={18} />
-                      Проверить произношение
-                    </button>
-                  )}
-                </div>
-              )}
-
-              {homeVoiceState === "listening" && (
-                <div className="flex flex-col items-center py-4 gap-3">
-                  <div className="relative">
-                    <div className="w-14 h-14 rounded-full bg-[#c9a96e]/15 flex items-center justify-center">
-                      <Icon name="Mic" size={24} className="text-[#c9a96e]" />
-                    </div>
-                    <div className="absolute inset-0 rounded-full border border-[#c9a96e]/40 animate-ping" />
-                  </div>
-                  <p className="text-[#c9a96e] text-sm">Говорите строку...</p>
-                  <p className="font-cormorant text-lg text-[#f0c070] text-center">{allLines[currentLine]}</p>
-                </div>
-              )}
-
-              {homeVoiceState === "analyzing" && (
-                <div className="flex flex-col items-center py-4 gap-3">
-                  <div className="flex gap-1 items-end">
-                    {[12, 20, 16, 24, 14, 20, 10].map((h, i) => (
-                      <div
-                        key={i}
-                        className="w-1.5 bg-[#c9a96e]/60 rounded-full animate-pulse"
-                        style={{ height: `${h}px`, animationDelay: `${i * 100}ms` }}
-                      />
-                    ))}
-                  </div>
-                  <p className="text-[#888] text-sm">Анализируем интонацию и ошибки...</p>
-                </div>
-              )}
-
-              {homeVoiceState === "done" && lineResult && (
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <p className="text-[#888] text-xs tracking-wider uppercase">Результат</p>
-                    <button
-                      onClick={() => { setHomeVoiceState("idle"); setLineResult(null); }}
-                      className="text-[#444] hover:text-[#888] transition-colors"
-                    >
-                      <Icon name="RotateCcw" size={14} />
-                    </button>
-                  </div>
-
-                  {/* Error highlight notice */}
-                  {lineResult.errors.length > 0 ? (
-                    <div className="flex items-start gap-2 mb-3 p-3 bg-[#c97070]/10 border border-[#c97070]/20">
-                      <Icon name="AlertCircle" size={14} className="text-[#c97070] mt-0.5 flex-shrink-0" />
-                      <div>
-                        <p className="text-[#c97070] text-xs font-medium mb-0.5">Найдены ошибки</p>
-                        <p className="text-[#888] text-xs">{lineResult.feedback}</p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-start gap-2 mb-3 p-3 bg-[#6b9b76]/10 border border-[#6b9b76]/20">
-                      <Icon name="CheckCircle2" size={14} className="text-[#6b9b76] mt-0.5 flex-shrink-0" />
-                      <p className="text-[#6b9b76] text-xs">{lineResult.feedback}</p>
-                    </div>
-                  )}
-
-                  <button
-                    onClick={handleMarkLearned}
-                    disabled={currentLine >= totalLines}
-                    className="w-full py-2.5 bg-[#6b9b76] text-[#0e0e0f] text-sm font-medium tracking-wider hover:bg-[#7aaa85] transition-all disabled:opacity-30"
-                  >
-                    {lineResult.errors.length > 0 ? "Всё равно выучил — далее" : "Строка выучена — следующая"}
-                  </button>
-                </div>
-              )}
-            </div>
-
-            {/* Bottom actions */}
-            <div className="flex gap-2">
-              <button
-                onClick={() => setScreen("catalog")}
-                className="flex-1 py-2.5 border border-[#2a2a2e] text-[#555] hover:text-[#888] hover:border-[#333] transition-all text-sm flex items-center justify-center gap-2"
-              >
-                <Icon name="BookOpen" size={14} />
-                Каталог стихов
-              </button>
-              <button
-                onClick={() => handleStartLearn(selectedPoem)}
-                className="flex-1 py-2.5 border border-[#c9a96e]/30 text-[#c9a96e] hover:bg-[#c9a96e]/10 transition-all text-sm flex items-center justify-center gap-2"
-              >
-                <Icon name="Layers" size={14} />
-                По строфам
-              </button>
             </div>
           </div>
         )}
